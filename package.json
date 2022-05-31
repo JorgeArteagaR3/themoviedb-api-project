@@ -1,0 +1,19 @@
+{
+  "name": "themoviedb-api-project",
+  "version": "1.0.0",
+  "description": "API REST with JavaScript",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JorgeArteagaR3/themoviedb-api-project.git"
+  },
+  "author": "@r3al",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JorgeArteagaR3/themoviedb-api-project/issues"
+  },
+  "homepage": "https://github.com/JorgeArteagaR3/themoviedb-api-project#readme"
+}
