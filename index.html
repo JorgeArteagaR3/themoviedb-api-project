@@ -5,9 +5,103 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <link rel="stylesheet" href="./styles/app.css" />
-        <title>Movie Lists</title>
+        <title>Movie Stats</title>
     </head>
     <body>
+        <svg class="goBack-arrow inactive" viewBox="0 0 58 58" fill="none">
+            <path
+                d="M42.5092 43.5L45.9167 40.0925L34.8483 29L45.9167 17.9075L42.5092 14.5L28.0092 29L42.5092 43.5Z"
+            />
+            <path
+                d="M26.5833 43.5L29.9908 40.0925L18.9225 29L29.9908 17.9075L26.5833 14.5L12.0833 29L26.5833 43.5Z"
+            />
+        </svg>
+        <header id="headerSection" class="header-section">
+            <h1 class="header-main-title">Movie Stats</h1>
+            <h1 class="header-genre-title inactive">Action</h1>
+            <form id="searchForm">
+                <div class="search-container">
+                    <input type="text" placeholder="Search..." />
+                    <div class="svg-container">
+                        <svg viewBox="0 0 512 513">
+                            <path
+                                d="M505 442.7L405.3 343C400.8 338.5 394.7 336 388.3 336H372C399.6 300.7 416 256.3 416 208C416 93.1 322.9 0 208 0C93.1 0 0 93.1 0 208C0 322.9 93.1 416 208 416C256.3 416 300.7 399.6 336 372V388.3C336 394.7 338.5 400.8 343 405.3L442.7 505C452.1 514.4 467.3 514.4 476.6 505L504.9 476.7C514.3 467.3 514.3 452.1 505 442.7ZM208 336C137.3 336 80 278.8 80 208C80 137.3 137.2 80 208 80C278.7 80 336 137.2 336 208C336 278.7 278.8 336 208 336Z"
+                                fill="white"
+                            />
+                        </svg>
+                    </div>
+                </div>
+            </form>
+        </header>
+        <section id="trendingPreview" class="trendingPreview-container">
+            <div class="trend-title-container">
+                <h2>Trends</h2>
+                <button id="seeMoreBtn" type="button">see more</button>
+            </div>
+
+            <article class="trendingPreview-movieList">
+                <!-- <div class="movie-container">
+                    <img class="movie-img" src="./imgs/joker.jpg" alt="" />
+                </div> -->
+            </article>
+        </section>
+        <section id="categoriesPreview" class="categoriesPreview-container">
+            <!-- <h2>Genre</h2>
+            <div class="category-container">
+                <div class="category-title-color color1"></div>
+                <h3 class="category-title">Action</h3>
+            </div> -->
+        </section>
+        <section id="genericList" class="genericList-container">
+            <div class="movie-container">
+                <img class="movie-img" src="./imgs/joker.jpg" alt="" />
+            </div>
+            <div class="movie-container">
+                <img class="movie-img" src="./imgs/joker.jpg" alt="" />
+            </div>
+            <div class="movie-container">
+                <img class="movie-img" src="./imgs/joker.jpg" alt="" />
+            </div>
+        </section>
+        <section id="movieDetail" class="movieDetail-container">
+            <img class="movie-img" src="./imgs/joker.jpg" alt="" />
+            <div class="movieDetail-container__details">
+                <div class="movieDetail-Title__container">
+                    <h2 class="movieDetail-Title">Joker</h2>
+                    <span class="movieDetail-score">
+                        <svg viewBox="0 0 22 20" fill="none">
+                            <path
+                                d="M11.8649 0.996237C11.4796 0.332087 10.5204 0.332084 10.1351 0.996237L7.42101 5.67355C7.23064 6.00163 6.90159 6.22552 6.52653 6.28217L1.44021 7.0504C0.58593 7.17942 0.28627 8.25803 0.951576 8.80923L4.74067 11.9485C5.09141 12.239 5.25633 12.6974 5.17113 13.1448L4.17996 18.35C4.02327 19.1728 4.88706 19.8121 5.62821 19.4219L10.4176 16.9001C10.7821 16.7081 11.2178 16.7081 11.5824 16.9001L16.3718 19.4219C17.1129 19.8121 17.9767 19.1728 17.82 18.35L16.8289 13.1448C16.7437 12.6974 16.9086 12.239 17.2593 11.9485L21.0484 8.80923C21.7137 8.25804 21.4141 7.17942 20.5598 7.0504L15.4735 6.28217C15.0984 6.22552 14.7694 6.00163 14.579 5.67355L11.8649 0.996237Z"
+                                fill="white"
+                            />
+                        </svg>
+                        9.3</span
+                    >
+                </div>
+                <p class="movieDetail-description">
+                    A mentally troubled stand-up comedian embarks on a downward
+                    spiral that leads to the creation of an iconic villain.
+                </p>
+                <article class="categories-list">
+                    <div class="category-container">
+                        <div class="category-title-color color1"></div>
+                        <h3 class="category-title">Action</h3>
+                    </div>
+                    <div class="category-container">
+                        <div class="category-title-color color2"></div>
+                        <h3 class="category-title">Romance</h3>
+                    </div>
+                    <div class="category-container">
+                        <div class="category-title-color color3"></div>
+                        <h3 class="category-title">Adventure</h3>
+                    </div>
+                </article>
+            </div>
+        </section>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="./src/secrets.js"></script>
+        <script src="./src/nodes.js"></script>
+        <script src="./src/navigation.js"></script>
         <script src="./src/main.js"></script>
     </body>
 </html>
