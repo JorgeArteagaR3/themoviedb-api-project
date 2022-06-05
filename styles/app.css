@@ -24,6 +24,7 @@ body {
   background-color: var(--primary);
   color: var(--title-color);
   margin: 0 auto;
+  max-width: 680px;
 }
 
 .trendingPreview-movieList .movie-container {
@@ -38,7 +39,7 @@ body {
 }
 
 .header-section h1 {
-  margin-top: 2em;
+  margin-top: 1em;
   margin-bottom: 1em;
   font-weight: bold;
   font-size: 2.3rem;
@@ -203,6 +204,7 @@ body {
       -ms-flex-pack: center;
           justify-content: center;
   width: 45%;
+  cursor: pointer;
 }
 
 .category-container :nth-child(3) {
@@ -249,6 +251,7 @@ body {
 
 .movieDetail-container {
   width: 100%;
+  max-width: 500px;
   margin: 0 auto;
   margin-bottom: 1em;
   position: relative;
@@ -257,18 +260,28 @@ body {
 .movieDetail-container .movie-img {
   width: 100%;
   border-radius: 0;
-  height: 480px;
+  height: 600px;
   max-width: 500px;
   text-align: center;
 }
 
+.movieDetail-container .background-color {
+  width: 100%;
+  max-width: 500px;
+  height: 400px;
+  position: absolute;
+  background: black;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(19%, rgba(0, 0, 0, 0.353379)), color-stop(29%, rgba(0, 0, 0, 0)));
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.353379) 19%, rgba(0, 0, 0, 0) 29%);
+}
+
 .movieDetail-container .movieDetail-container__details {
   position: relative;
-  margin-top: -30px;
+  margin-top: -35px;
   padding: 0 3em;
   z-index: 2;
   background-color: var(--primary);
-  border-radius: 16px 16px 0px 0px;
+  border-radius: 25px 25px 0px 0px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -298,22 +311,27 @@ body {
 
 .movieDetail-container .movieDetail-container__details .movieDetail-Title__container .movieDetail-Title {
   font-size: 2.5rem;
+  width: 80%;
 }
 
-.movieDetail-container .movieDetail-container__details .movieDetail-Title__container .movieDetail-score {
+.movieDetail-container .movieDetail-container__details .movieDetail-Title__container .movieDetail-score-container .score-star {
+  width: 16px;
+  position: absolute;
+  top: calc(100% - 10px);
+  right: 25px;
+}
+
+.movieDetail-container .movieDetail-container__details .movieDetail-Title__container .movieDetail-score-container .score-star path {
+  fill: var(--secondary);
+}
+
+.movieDetail-container .movieDetail-container__details .movieDetail-Title__container .movieDetail-score-container .movieDetail-score {
   font-size: 1.6rem;
   position: absolute;
+  width: 20px;
+  text-align: left;
   right: 0;
   top: calc(100% - 12.5px);
-}
-
-.movieDetail-container .movieDetail-container__details .movieDetail-Title__container .movieDetail-score svg {
-  width: 16px;
-  margin-right: 5px;
-}
-
-.movieDetail-container .movieDetail-container__details .movieDetail-Title__container .movieDetail-score svg path {
-  fill: var(--secondary);
 }
 
 .movieDetail-container .movieDetail-container__details .movieDetail-description {
@@ -343,6 +361,7 @@ body {
 .movie-img {
   width: 150px;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .genericList-container {
@@ -356,10 +375,6 @@ body {
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   gap: 10px;
-}
-
-.inactive {
-  display: none;
 }
 
 #id28 {
@@ -438,19 +453,58 @@ body {
   --idcolor: #e5a4cb;
 }
 
-.goBack-arrow {
-  width: 55px;
-  margin-top: 2.5em;
-  margin-left: 1.5em;
+#arrowContainer {
+  position: relative;
+  height: 50px;
+}
+
+.goBack-arrow-container {
+  height: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.goBack-arrow-container .goBack-arrow {
+  width: 40px;
+  position: fixed;
+  margin-left: 3em;
+  z-index: 5;
+  background-color: var(--secondary);
+  opacity: 0.5;
+  border-radius: 50%;
   cursor: pointer;
 }
 
-.goBack-arrow path {
-  fill: var(--third);
+.goBack-arrow-container .goBack-arrow path {
+  fill: var(--primary);
 }
 
 .arrowOnDetail {
+  z-index: 10;
   position: absolute;
+}
+
+.goBack-arrow-movie-section {
+  width: 40px;
+  position: fixed;
+  top: 15px;
+  margin-left: 3em;
   z-index: 5;
+  background-color: var(--secondary);
+  opacity: 0.7;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.goBack-arrow-movie-section path {
+  fill: var(--primary);
+}
+
+.inactive {
+  display: none;
 }
 /*# sourceMappingURL=app.css.map */
