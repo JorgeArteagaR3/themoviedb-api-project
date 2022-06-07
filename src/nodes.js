@@ -24,6 +24,9 @@ const movieDetailImg = document.querySelector("#movieDetail .movie-img");
 const movieDetailDescription = document.querySelector(
     ".movieDetail-description"
 );
+const relatedMoviesContainer = document.getElementById(
+    "relatedMoviesContainer"
+);
 const movieDetailGenresContainer = document.querySelector(
     ".movieDetail-container__details .categories-list"
 );
@@ -35,3 +38,4 @@ const searchBtn = document.querySelector(".svg-container");
 const searchInput = document.querySelector(".search-input");
 const seeMoreBtn = document.getElementById("seeMoreBtn");
 const arrow = document.querySelector(".goBack-arrow");
+const seeMoreBtnContainer = document.getElementById("seeMoreBtnContainer");

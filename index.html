@@ -19,7 +19,9 @@
             </svg>
         </div>
         <header id="headerSection" class="header-section">
-            <h1 class="header-main-title">Movie Stats</h1>
+            <h1 class="header-main-title">
+                Movie <span class="logo">Stats</span>
+            </h1>
             <h1 class="header-genre-title inactive">Action</h1>
             <form id="searchForm">
                 <div class="search-container">
@@ -59,7 +61,7 @@
             </div> -->
         </section>
         <section id="genericList" class="genericList-container">
-            <div class="movie-container">
+            <!-- <div class="movie-container">
                 <img class="movie-img" src="./imgs/joker.jpg" alt="" />
             </div>
             <div class="movie-container">
@@ -67,8 +69,10 @@
             </div>
             <div class="movie-container">
                 <img class="movie-img" src="./imgs/joker.jpg" alt="" />
-            </div>
+            </div> -->
         </section>
+        <article id="seeMoreBtnContainer"></article>
+
         <section id="movieDetail" class="movieDetail-container">
             <svg
                 class="goBack-arrow-movie-section"
@@ -104,6 +108,10 @@
                 </p>
                 <article class="categories-list"></article>
             </div>
+            <article class="related-movies-container">
+                <h2>Related Movies</h2>
+                <div id="relatedMoviesContainer"></div>
+            </article>
         </section>
         <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
         <script src="./src/secrets.js"></script>

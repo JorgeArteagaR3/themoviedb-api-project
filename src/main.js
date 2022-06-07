@@ -1,3 +1,4 @@
+let seeMoreCount = 2;
 const api = axios.create({
     baseURL: "https://api.themoviedb.org/3/",
     headers: {
@@ -10,6 +11,9 @@ const api = axios.create({
 
 const createMovie = (arr, container) => {
     container.innerHTML = "";
+    createMoreMovie(arr, container);
+};
+const createMoreMovie = (arr, container) => {
     arr.forEach((movie) => {
         const movieContainer = document.createElement("div");
         movieContainer.classList.add("movie-container");
@@ -65,7 +69,7 @@ async function getCategoriesPreview() {
     const genres = data.genres;
     categoriesListContainer.innerHTML = "";
     const genreTitle = document.createElement("h2");
-    genreTitle.innerText = "Genre";
+    genreTitle.innerText = "Genres";
     categoriesListContainer.appendChild(genreTitle);
     createCategories(genres, categoriesListContainer);
 }
@@ -97,15 +101,41 @@ async function getTrendingMoviesList() {
     const movies = data.results;
     genericListContainer.innerHTML = "";
     createMovie(movies, genericListContainer);
+    const seeMoreButton = document.createElement("button");
+    seeMoreBtnContainer.innerHTML = "";
+    seeMoreBtnContainer.appendChild(seeMoreButton);
+    seeMoreButton.classList.add("seeMore-btn");
+    seeMoreButton.textContent = "see more";
+    seeMoreButton.setAttribute("type", "button");
+    seeMoreBtnContainer.classList.remove("inactive");
+
+    seeMoreButton.addEventListener("click", () => {
+        seeMoreButtonTrending();
+        seeMoreCount += 1;
+    });
 }
 
 async function getMovieById(id) {
     const { data, status } = await api("/movie/" + id);
-    console.log(data);
     movieDetailTitle.textContent = data.original_title;
     movieScore.textContent = data.vote_average;
     movieDetailImg.src = "https://image.tmdb.org/t/p/w500/" + data.poster_path;
     movieDetailDescription.textContent = data.overview;
     movieDetailGenresContainer.innerHTML = "";
     createCategories(data.genres, movieDetailGenresContainer);
+}
+const seeMoreButtonTrending = async () => {
+    const { data } = await api("trending/movie/day", {
+        params: {
+            page: seeMoreCount,
+        },
+    });
+    const movies = data.results;
+    createMoreMovie(movies, genericListContainer);
+};
+
+async function getSimilarMovies(id) {
+    const { data, status } = await api(`/movie/${id}/similar`);
+    console.log(data.results);
+    createMovie(data.results, relatedMoviesContainer);
 }

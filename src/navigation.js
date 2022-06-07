@@ -1,3 +1,4 @@
+let lastUrl = [];
 window.addEventListener("hashchange", navigator, false);
 window.addEventListener("DOMContentLoaded", navigator, false);
 searchInput.addEventListener("keypress", (e) => {
@@ -11,16 +12,25 @@ searchBtn.addEventListener("click", () => {
 seeMoreBtn.addEventListener("click", () => {
     location.hash = "#trends";
 });
-
+const back = () => {
+    if (lastUrl.length < 2) {
+        location.hash = "#home";
+    } else {
+        lastUrl.pop();
+        location.hash = lastUrl[lastUrl.length - 1];
+    }
+};
 secondArrow.addEventListener("click", () => {
-    location.hash = window.history.back();
+    back();
 });
 arrow.addEventListener("click", () => {
-    location.hash = window.history.back();
+    back();
 });
 function navigator() {
+    if (lastUrl.length === 0 || location.hash != lastUrl[lastUrl.length - 1]) {
+        lastUrl.push(location.hash);
+    }
     window.scrollTo(0, 0);
-
     if (location.hash.startsWith("#trends")) {
         trendsPage();
     } else if (location.hash.startsWith("#search=")) {
@@ -47,7 +57,7 @@ const homePage = () => {
     arrow.classList.remove("arrowOnDetail");
     arrow.classList.add("inactive");
     headersSection.style.height = "100%";
-
+    seeMoreBtnContainer.classList.add("inactive");
     getCategoriesPreview();
     getTrendingMovies();
 };
@@ -80,9 +90,11 @@ const movieDetailsPage = (id) => {
     arrow.classList.remove("inactive");
     arrow.classList.add("arrowOnDetail");
     headersSection.style.height = "0";
+    seeMoreBtnContainer.classList.add("inactive");
 
     const [_, movieId] = location.hash.split("=");
     getMovieById(movieId);
+    getSimilarMovies(movieId);
 };
 
 const categoriesPage = () => {
@@ -96,7 +108,7 @@ const categoriesPage = () => {
     genericListContainer.classList.remove("inactive");
     headerGenreTitle.classList.remove("inactive");
     arrowContainer.classList.remove("inactive");
-
+    headersSection.classList.remove("inactive");
     const [unncesesary, idname] = location.hash.split("=");
     const [id, name] = idname.split("-");
     const newname = decodeURI(name);
