@@ -473,14 +473,9 @@ body {
         align-items: center;
 
         .background-color {
-            background: rgb(24, 23, 21);
-            background: linear-gradient(
-                180deg,
-                rgba(24, 23, 21, 1) 25%,
-                rgba(24, 23, 21, 0.7343312324929971) 89%
-            );
             height: 750px;
             max-width: 1440px;
+            filter: blur(35px);
         }
         .movie-img {
             justify-self: center;

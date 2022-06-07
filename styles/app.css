@@ -625,11 +625,10 @@ body {
             align-items: center;
   }
   .movieDetail-container .background-color {
-    background: #181715;
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(25%, #181715), color-stop(89%, rgba(24, 23, 21, 0.734331)));
-    background: linear-gradient(180deg, #181715 25%, rgba(24, 23, 21, 0.734331) 89%);
     height: 750px;
     max-width: 1440px;
+    -webkit-filter: blur(35px);
+            filter: blur(35px);
   }
   .movieDetail-container .movie-img {
     -ms-grid-column-align: center;

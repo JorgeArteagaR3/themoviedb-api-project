@@ -118,6 +118,9 @@ async function getTrendingMoviesList() {
 async function getMovieById(id) {
     const { data, status } = await api("/movie/" + id);
     movieDetailTitle.textContent = data.original_title;
+    backgroundContainer.style.background = `url(${
+        "https://image.tmdb.org/t/p/w500/" + data.poster_path
+    })`;
     movieScore.textContent = data.vote_average;
     movieDetailImg.src = "https://image.tmdb.org/t/p/w500/" + data.poster_path;
     movieDetailDescription.textContent = data.overview;

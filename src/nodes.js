@@ -17,6 +17,7 @@ const categoriesListContainer = document.querySelector(
     ".categoriesPreview-container"
 );
 //MOVIE DETAILS
+const backgroundContainer = document.querySelector(".background-color");
 const movieDetailContainer = document.getElementById("movieDetail");
 const movieDetailTitle = document.querySelector(".movieDetail-Title");
 const movieScore = document.querySelector(".movieDetail-score");
