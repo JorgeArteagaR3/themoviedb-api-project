@@ -10,7 +10,7 @@
     --third: #8d2626;
     --title-color: #181715;
     --subtitle-color: #e5e5e5;
-    --idcolor: ;
+    --loading-color: #8d8d92;
 }
 html {
     font-family: "Dosis", sans-serif;
@@ -23,10 +23,42 @@ body {
     max-width: 800px;
     min-width: 375px;
 }
+.category-container-loader {
+    animation: loading-skeleton infinite 1.5s;
+    div:nth-child(1) {
+        width: 25px;
+        height: 100%;
+        margin-right: 13px;
+        background-color: var(--loading-color);
+        border-radius: 8px;
+    }
+    div:nth-child(2) {
+        width: 100%;
+        height: 100%;
+        background-color: var(--loading-color);
+        border-radius: 7px;
+    }
+}
+.category-container-loader:nth-child(even) {
+    animation-delay: 0.2s;
+}
+
 .trendingPreview-movieList {
+    height: 225px;
     .movie-container {
         display: inline-block;
     }
+}
+.movie-container-loading {
+    background: var(--loading-color);
+    width: 150px;
+    height: 100%;
+    border-radius: 10px;
+    cursor: pointer;
+    animation: loading-skeleton infinite 1.5s;
+}
+.movie-container-loading:nth-child(even) {
+    animation-delay: 0.2s;
 }
 
 .header-section {
@@ -108,7 +140,8 @@ body {
         }
     }
     .trendingPreview-movieList {
-        display: flex;
+        display: grid;
+        grid-template-columns: repeat(20, 1fr);
         gap: 10px;
         overflow-x: scroll;
         overscroll-behavior-x: contain;
@@ -141,9 +174,7 @@ body {
     justify-content: center;
     width: 45%;
     cursor: pointer;
-    :nth-child(3) {
-        background-color: #e5e5e5;
-    }
+
     .category-title-color {
         width: 25px;
         height: 100%;
@@ -173,6 +204,9 @@ body {
         font-weight: 500;
         width: 70%;
         font-size: 1.8rem;
+        &:hover {
+            text-decoration: underline;
+        }
     }
 }
 .movieDetail-container {
@@ -188,18 +222,15 @@ body {
         height: 600px;
         max-width: 500px;
         text-align: center;
+        z-index: 2;
+        position: relative;
     }
     .background-color {
         width: 100%;
         max-width: 500px;
         height: 400px;
         position: absolute;
-        background: rgb(0, 0, 0);
-        background: linear-gradient(
-            180deg,
-            rgba(0, 0, 0, 0.3533788515406162) 19%,
-            rgba(0, 0, 0, 0) 29%
-        );
+        background: url(hidden);
     }
     .movieDetail-container__details {
         position: relative;
@@ -300,13 +331,19 @@ body {
 }
 #relatedMoviesContainer {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: repeat(2, minmax(150px, auto));
+    grid-template-rows: repeat(10, minmax(228.75px, auto));
+    height: 100%;
     gap: 10px;
     .movie-img {
         width: 100%;
         height: auto;
         cursor: pointer;
         border-radius: 10px;
+    }
+    .movie-container-loading {
+        width: 100%;
+        min-height: 228.75px;
     }
 }
 #id28 {
@@ -416,7 +453,10 @@ body {
         grid-template-columns: 15% 70% 15%;
         grid-template-rows: 1fr;
     }
-
+    .movie-container-loading {
+        width: 100%;
+        height: 100%;
+    }
     .trendingPreview-container {
         grid-area: 1 / 2 / 3 / 3;
         margin-bottom: 0;
@@ -429,11 +469,14 @@ body {
             }
         }
         .trendingPreview-movieList {
+            height: 100%;
             overflow-x: hidden;
             display: grid;
-            grid-template-columns: 1fr 1fr 1fr 1fr;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(5, minmax(342px, auto));
             .movie-img {
                 width: 100%;
+                height: 100%;
             }
         }
     }
@@ -480,7 +523,6 @@ body {
         .movie-img {
             justify-self: center;
             height: 100%;
-            z-index: 2;
         }
         .goBack-arrow-movie-section {
             left: 210px;
@@ -508,12 +550,16 @@ body {
         }
     }
     #relatedMoviesContainer {
-        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-columns: repeat(4, minmax(214.5px, auto));
+        .movie-container-loading {
+            height: 100%;
+        }
     }
     .genericList-container {
         grid-column: 2;
         display: grid;
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4, minmax(244.5px, auto));
+        grid-template-rows: repeat(5, minmax(366px, auto));
         .movie-img {
             width: 100%;
         }
@@ -522,6 +568,17 @@ body {
         grid-column: 2;
     }
 }
+
 .inactive {
     display: none !important;
+}
+
+@keyframes loading-skeleton {
+    0%,
+    100% {
+        opacity: 70%;
+    }
+    50% {
+        opacity: 10%;
+    }
 }

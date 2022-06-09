@@ -61,27 +61,32 @@ async function getTrendingMovies() {
     const trendingPreviewMoviesContainer = document.querySelector(
         "#trendingPreview .trendingPreview-movieList"
     );
+
     createMovie(movies, trendingPreviewMoviesContainer);
 }
 
 async function getCategoriesPreview() {
-    const { data, status } = await api("genre/movie/list");
-    const genres = data.genres;
-    categoriesListContainer.innerHTML = "";
     const genreTitle = document.createElement("h2");
     genreTitle.innerText = "Genres";
+    categoriesListContainer.prepend(genreTitle);
+    const { data, status } = await api("genre/movie/list");
+    categoriesListContainer.innerHTML = "";
     categoriesListContainer.appendChild(genreTitle);
+
+    const genres = data.genres;
+
     createCategories(genres, categoriesListContainer);
 }
 
 const getTrendingMoviesByCategory = async (id, name) => {
+    headerGenreTitle.innerText = name;
+
     const { data } = await api("discover/movie", {
         params: {
             with_genres: id,
         },
     });
     const movies = data.results;
-    headerGenreTitle.innerText = name;
 
     createMovie(movies, genericListContainer);
 };
@@ -120,7 +125,8 @@ async function getMovieById(id) {
     movieDetailTitle.textContent = data.original_title;
     backgroundContainer.style.background = `url(${
         "https://image.tmdb.org/t/p/w500/" + data.poster_path
-    })`;
+    }) no-repeat `;
+    backgroundContainer.style.backgroundSize = "cover";
     movieScore.textContent = data.vote_average;
     movieDetailImg.src = "https://image.tmdb.org/t/p/w500/" + data.poster_path;
     movieDetailDescription.textContent = data.overview;
@@ -139,6 +145,5 @@ const seeMoreButtonTrending = async () => {
 
 async function getSimilarMovies(id) {
     const { data, status } = await api(`/movie/${id}/similar`);
-    console.log(data.results);
     createMovie(data.results, relatedMoviesContainer);
 }
