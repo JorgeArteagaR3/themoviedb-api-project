@@ -1,4 +1,3 @@
-let seeMoreCount = 2;
 const api = axios.create({
     baseURL: "https://api.themoviedb.org/3/",
     headers: {
@@ -8,12 +7,22 @@ const api = axios.create({
         api_key: "d1770de77ffb7b48f7629704782abfec",
     },
 });
+//UTILS
 
-const createMovie = (arr, container) => {
+const lazyLoader = new IntersectionObserver((entries) => {
+    entries.forEach((image) => {
+        if (image.isIntersecting) {
+            const url = image.target.getAttribute("data-img");
+            image.target.setAttribute("src", url);
+        }
+    });
+});
+
+const createMovie = (arr, container, lazyload = false) => {
     container.innerHTML = "";
-    createMoreMovie(arr, container);
+    createMoreMovie(arr, container, lazyload);
 };
-const createMoreMovie = (arr, container) => {
+const createMoreMovie = (arr, container, lazyload) => {
     arr.forEach((movie) => {
         const movieContainer = document.createElement("div");
         movieContainer.classList.add("movie-container");
@@ -21,16 +30,25 @@ const createMoreMovie = (arr, container) => {
         moviePoster.classList.add("movie-img");
         moviePoster.setAttribute("alt", movie.title);
         moviePoster.setAttribute(
-            "src",
+            lazyload ? "data-img" : "src",
             "https://image.tmdb.org/t/p/w500/" + movie.poster_path
         );
-
-        movieContainer.appendChild(moviePoster);
-
-        container.appendChild(moviePoster);
         moviePoster.addEventListener("click", () => {
             location.hash = "#movie=" + movie.id;
         });
+        if (lazyload) {
+            lazyLoader.observe(moviePoster);
+            if (moviePoster.dataset.img.includes("null")) {
+                // moviePoster.dataset.img =
+                //     "https://www.popcorn.app/assets/app/images/placeholder-movieimage.png";
+                movieContainer.innerText = movie.title;
+                moviePoster.classList.add("inactive");
+                movieContainer.style.background = "#ffa41c";
+            }
+        }
+
+        movieContainer.appendChild(moviePoster);
+        container.appendChild(movieContainer);
     });
 };
 function createCategories(arr, container) {
@@ -62,7 +80,10 @@ async function getTrendingMovies() {
         "#trendingPreview .trendingPreview-movieList"
     );
 
-    createMovie(movies, trendingPreviewMoviesContainer);
+    maxPage = data.total_pages;
+    console.log(maxPage);
+
+    createMovie(movies, trendingPreviewMoviesContainer, true);
 }
 
 async function getCategoriesPreview() {
@@ -87,8 +108,14 @@ const getTrendingMoviesByCategory = async (id, name) => {
         },
     });
     const movies = data.results;
-
-    createMovie(movies, genericListContainer);
+    maxPage = data.total_pages;
+    console.log(maxPage);
+    createMovie(movies, genericListContainer, true);
+};
+const seeMoreMoviesByCategory = (id) => {
+    return async () => {
+        seeMorePages("discover/movie", { with_genres: id });
+    };
 };
 const getMoviesBySearch = async (query) => {
     const { data } = await api("search/movie", {
@@ -98,26 +125,18 @@ const getMoviesBySearch = async (query) => {
     });
     const movies = data.results;
 
-    createMovie(movies, genericListContainer);
+    createMovie(movies, genericListContainer, true);
 };
-
+const seeMoreMoviesBySearch = (query) => {
+    return async () => {
+        seeMorePages("search/movie", { query });
+    };
+};
 async function getTrendingMoviesList() {
     const { data, status } = await api("trending/movie/day");
     const movies = data.results;
     genericListContainer.innerHTML = "";
-    createMovie(movies, genericListContainer);
-    const seeMoreButton = document.createElement("button");
-    seeMoreBtnContainer.innerHTML = "";
-    seeMoreBtnContainer.appendChild(seeMoreButton);
-    seeMoreButton.classList.add("seeMore-btn");
-    seeMoreButton.textContent = "see more";
-    seeMoreButton.setAttribute("type", "button");
-    seeMoreBtnContainer.classList.remove("inactive");
-
-    seeMoreButton.addEventListener("click", () => {
-        seeMoreButtonTrending();
-        seeMoreCount += 1;
-    });
+    createMovie(movies, genericListContainer, true);
 }
 
 async function getMovieById(id) {
@@ -133,17 +152,33 @@ async function getMovieById(id) {
     movieDetailGenresContainer.innerHTML = "";
     createCategories(data.genres, movieDetailGenresContainer);
 }
-const seeMoreButtonTrending = async () => {
-    const { data } = await api("trending/movie/day", {
-        params: {
-            page: seeMoreCount,
-        },
-    });
-    const movies = data.results;
-    createMoreMovie(movies, genericListContainer);
+const seeMoreTrendingPages = async () => {
+    const endpoint = "trending/movie/day";
+    seeMorePages(endpoint);
+};
+const seeMorePages = async (endpoint, extraParams = {}) => {
+    if (isInfiniteScrollLoading) return;
+    const { scrollTop, clientHeight, scrollHeight } = document.documentElement;
+    let bottomPageScroll = scrollTop + clientHeight >= scrollHeight - 15;
+    const pageIsNotMax = seeMoreCount < maxPage;
+    if (bottomPageScroll && pageIsNotMax) {
+        isInfiniteScrollLoading = true;
+        const { data } = await api(endpoint, {
+            params: {
+                page: seeMoreCount++,
+                ...extraParams,
+            },
+        });
+        const movies = data.results;
+        createMoreMovie(movies, genericListContainer, true);
+        isInfiniteScrollLoading = false;
+
+        console.log(data);
+        console.log(seeMoreCount);
+    }
 };
 
 async function getSimilarMovies(id) {
     const { data, status } = await api(`/movie/${id}/similar`);
-    createMovie(data.results, relatedMoviesContainer);
+    createMovie(data.results, relatedMoviesContainer, true);
 }

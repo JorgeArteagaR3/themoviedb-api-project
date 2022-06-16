@@ -44,10 +44,22 @@ body {
 }
 
 .trendingPreview-movieList {
-    height: 225px;
+    min-height: 225px;
     .movie-container {
         display: inline-block;
     }
+}
+.movie-container {
+    min-height: 225px;
+    min-width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    font-size: 2.3rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    text-align: center;
 }
 .movie-container-loading {
     background: var(--loading-color);
@@ -72,14 +84,15 @@ body {
         font-weight: bold;
         font-size: 2.3rem;
         color: var(--title-color);
+        .logo {
+            color: var(--secondary);
+        }
     }
     form {
         width: 100%;
         .search-container {
-            padding: 5em 0;
             background-color: var(--secondary);
             width: 100%;
-            padding: 0.7em 1em;
             background-color: var(--primary);
             border: 1px solid #ddd;
             border-radius: 10px;
@@ -89,9 +102,18 @@ body {
 
             input {
                 border: none;
+                padding: 0.7em 1em;
+                border-radius: 10px;
+                width: 100%;
+                height: 100%;
+                font-family: "Dosis", sans-serif;
+
                 &::placeholder {
                     font-weight: bold;
                     color: #a0a0a0;
+                }
+                &:focus {
+                    outline: 1px solid var(--secondary);
                 }
             }
             .svg-container {
@@ -126,7 +148,7 @@ body {
         display: flex;
         justify-content: space-between;
         align-items: center;
-        margin-bottom: 1em;
+        margin-bottom: 2em;
         h2 {
             font-size: 1.8rem;
         }
@@ -412,6 +434,7 @@ body {
     height: 60px;
     display: flex;
     align-items: center;
+    position: relative;
     .goBack-arrow {
         width: 40px;
         position: fixed;
@@ -452,6 +475,11 @@ body {
         display: grid;
         grid-template-columns: 15% 70% 15%;
         grid-template-rows: 1fr;
+    }
+    .header-section {
+        .header-genre-title {
+            margin-left: 0;
+        }
     }
     .movie-container-loading {
         width: 100%;
@@ -498,13 +526,12 @@ body {
         }
     }
     .header-section {
+        padding-left: 0em;
         padding-top: 2em;
+        margin-bottom: 0;
         .header-main-title {
             font-size: 3rem;
             margin-top: 0;
-            .logo {
-                color: var(--secondary);
-            }
         }
     }
 
