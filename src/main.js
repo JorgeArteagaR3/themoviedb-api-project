@@ -27,6 +27,8 @@ const createMoreMovie = (arr, container, lazyload) => {
         const movieContainer = document.createElement("div");
         movieContainer.classList.add("movie-container");
         const moviePoster = document.createElement("img");
+        const likeBtn = document.createElement("button");
+        likeBtn.classList.add("like-btn");
         moviePoster.classList.add("movie-img");
         moviePoster.setAttribute("alt", movie.title);
         moviePoster.setAttribute(
@@ -46,8 +48,11 @@ const createMoreMovie = (arr, container, lazyload) => {
                 movieContainer.style.background = "#ffa41c";
             }
         }
-
+        likeBtn.addEventListener("click", () => {
+            likeBtn.classList.toggle("like-btn--liked");
+        });
         movieContainer.appendChild(moviePoster);
+        movieContainer.appendChild(likeBtn);
         container.appendChild(movieContainer);
     });
 };

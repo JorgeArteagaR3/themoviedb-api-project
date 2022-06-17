@@ -60,6 +60,52 @@ body {
     text-overflow: ellipsis;
     overflow: hidden;
     text-align: center;
+    position: relative;
+
+    .like-btn {
+        position: absolute;
+        right: 10px;
+        top: 15px;
+        width: 30px;
+        height: 30px;
+        background-color: var(--loading-color);
+        border-radius: 50%;
+        border: none;
+        background-image: url(../imgs/Star.png);
+        background-size: 20px;
+        background-position: center;
+        background-repeat: no-repeat;
+        display: none;
+    }
+    .like-btn--liked {
+        background-image: url(../imgs/redstar.png);
+        background-color: var(--primary);
+        display: block;
+    }
+    &:hover {
+        .like-btn {
+            display: block;
+        }
+    }
+}
+.liked-movie-container {
+    padding: 0 3em;
+    .liked-header {
+        margin-bottom: 1em;
+        .liked-title {
+            font-size: 1.8rem;
+        }
+    }
+    .liked-movieList {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        .movie-container {
+            .movie-img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
 }
 .movie-container-loading {
     background: var(--loading-color);
@@ -474,7 +520,7 @@ body {
         max-width: 100%;
         display: grid;
         grid-template-columns: 15% 70% 15%;
-        grid-template-rows: 1fr;
+        grid-template-rows: auto auto;
     }
     .header-section {
         .header-genre-title {
@@ -486,7 +532,8 @@ body {
         height: 100%;
     }
     .trendingPreview-container {
-        grid-area: 1 / 2 / 3 / 3;
+        grid-column: 2;
+        grid-row: 1 / 2;
         margin-bottom: 0;
         padding-top: 2em;
         border-right: 3px solid var(--title-color);
@@ -505,6 +552,19 @@ body {
             .movie-img {
                 width: 100%;
                 height: 100%;
+            }
+        }
+    }
+    .liked-movie-container {
+        border-right: 3px solid var(--title-color);
+        border-left: 3px solid var(--title-color);
+        grid-row: 2 / 3;
+        grid-column: 2;
+        .liked-header {
+            margin-top: 8em;
+            margin-bottom: 2em;
+            .liked-title {
+                font-size: 2.5rem;
             }
         }
     }

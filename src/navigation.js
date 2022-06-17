@@ -6,8 +6,13 @@ let lastUrl = [];
 window.addEventListener("hashchange", navigator, false);
 window.addEventListener("DOMContentLoaded", navigator, false);
 searchInput.addEventListener("keypress", (e) => {
+    console.log(e);
     let searchData = searchInput.value;
-    e.keyCode == 13 ? (location.hash = `#search=${searchData}`) : "";
+    if (e.keyCode === 13 || e.which === 13) {
+        location.hash = `#search=${searchData}`;
+        e.preventDefault();
+        return false;
+    }
 });
 searchBtn.addEventListener("click", () => {
     let searchData = searchInput.value;
