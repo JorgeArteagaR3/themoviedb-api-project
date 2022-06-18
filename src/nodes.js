@@ -40,3 +40,7 @@ const searchInput = document.querySelector(".search-input");
 const seeMoreBtn = document.getElementById("seeMoreBtn");
 const arrow = document.querySelector(".goBack-arrow");
 const seeMoreBtnContainer = document.getElementById("seeMoreBtnContainer");
+
+//FAVOURITE SECTION
+const likedMovieListContainer = document.querySelector(".liked-movieList");
+const likedMovieContainer = document.querySelector(".liked-movie-container");

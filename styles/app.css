@@ -94,7 +94,13 @@ body {
   background-size: 20px;
   background-position: center;
   background-repeat: no-repeat;
+  cursor: pointer;
   display: none;
+}
+
+.movie-container .like-btn:hover {
+  background-image: url(../imgs/redstar.png);
+  background-color: var(--primary);
 }
 
 .movie-container .like-btn--liked {
@@ -124,11 +130,21 @@ body {
   display: grid;
   -ms-grid-columns: (1fr)[4];
       grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
 }
 
 .liked-movie-container .liked-movieList .movie-container .movie-img {
   width: 100%;
   height: 100%;
+}
+
+.liked-movie-container .liked-movieList .movie-container .like-btn {
+  cursor: pointer;
+}
+
+.liked-movie-container .liked-movieList .movie-container .like-btn:hover {
+  background-color: var(--loading-color);
+  background-image: url(../imgs/Star.png);
 }
 
 .movie-container-loading {

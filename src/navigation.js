@@ -79,8 +79,11 @@ const homePage = () => {
     headersSection.style.paddingLeft = "3em";
     headersSection.style.marginBottom = "3em";
     seeMoreBtnContainer.classList.add("inactive");
+    likedMovieContainer.classList.remove("inactive");
+
     getCategoriesPreview();
     getTrendingMovies();
+    createFavouriteMoviesList();
 };
 const trendsPage = () => {
     headerGenreTitle.style.marginTop = "0";
@@ -96,7 +99,7 @@ const trendsPage = () => {
     headerGenreTitle.innerText = "Trending";
     headersSection.style.paddingLeft = "0em";
     headersSection.style.marginBottom = "0em";
-
+    likedMovieContainer.classList.add("inactive");
     getTrendingMoviesList();
     infiniteScroll = seeMoreTrendingPages;
 };
