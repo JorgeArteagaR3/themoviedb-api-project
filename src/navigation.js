@@ -120,6 +120,7 @@ const movieDetailsPage = (id) => {
     headersSection.style.height = "0";
     seeMoreBtnContainer.classList.add("inactive");
     headersSection.style.paddingLeft = "0em";
+    likedMovieContainer.classList.add("inactive");
 
     const [_, movieId] = location.hash.split("=");
     getMovieById(movieId);
@@ -140,6 +141,7 @@ const categoriesPage = () => {
     arrowContainer.classList.remove("inactive");
     headersSection.classList.remove("inactive");
     headersSection.style.paddingLeft = "1.5em";
+    likedMovieContainer.classList.add("inactive");
 
     const [unncesesary, idname] = location.hash.split("=");
     const [id, name] = idname.split("-");
@@ -165,6 +167,8 @@ const searchPage = () => {
     headersSection.style.marginBottom = "3em";
     genericListContainer.style.padding = "0 3em";
     arrowContainer.classList.remove("inactive");
+    likedMovieContainer.classList.add("inactive");
+
     const [_, searchQuery] = location.hash.split("=");
     getMoviesBySearch(decodeURI(searchQuery));
     infiniteScroll = seeMoreMoviesBySearch(decodeURI(searchQuery));

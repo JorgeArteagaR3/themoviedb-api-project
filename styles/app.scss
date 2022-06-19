@@ -304,8 +304,6 @@ body {
         height: 600px;
         max-width: 500px;
         text-align: center;
-        z-index: 2;
-        position: relative;
     }
     .background-color {
         width: 100%;
@@ -380,6 +378,7 @@ body {
     width: 150px;
     border-radius: 10px;
     cursor: pointer;
+    position: relative;
 }
 
 .genericList-container {
@@ -414,7 +413,6 @@ body {
 #relatedMoviesContainer {
     display: grid;
     grid-template-columns: repeat(2, minmax(150px, auto));
-    grid-template-rows: repeat(10, minmax(228.75px, auto));
     height: 100%;
     gap: 10px;
     .movie-img {

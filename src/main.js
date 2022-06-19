@@ -5,6 +5,7 @@ const api = axios.create({
     },
     params: {
         api_key: "d1770de77ffb7b48f7629704782abfec",
+        language: navigator.language || "en-EN",
     },
 });
 //UTILS
@@ -19,17 +20,16 @@ const lazyLoader = new IntersectionObserver((entries) => {
 });
 const likedMoviesList = () => {
     const item = JSON.parse(localStorage.getItem("liked_movies"));
-    let movies;
-    item ? (movies = item) : (movies = {});
-    return movies;
+    // let movies;
+    // item ? (movies = item) : (movies = {});
+    return item || {};
 };
 const likedMovie = (movie) => {
     const likedMovies = likedMoviesList();
-    if (likedMovies[movie.id]) {
-        likedMovies[movie.id] = undefined;
-    } else {
-        likedMovies[movie.id] = movie;
-    }
+    likedMovies[movie.id]
+        ? (likedMovies[movie.id] = undefined)
+        : (likedMovies[movie.id] = movie);
+
     localStorage.setItem("liked_movies", JSON.stringify(likedMovies));
 };
 
@@ -69,9 +69,8 @@ const createMoreMovie = (arr, container, lazyload) => {
             likedMovie(movie);
             createFavouriteMoviesList();
         });
-        if (likedMoviesList()[movie.id]) {
-            likeBtn.classList.add("like-btn--liked");
-        }
+        likedMoviesList()[movie.id] && likeBtn.classList.add("like-btn--liked");
+
         movieContainer.appendChild(moviePoster);
         movieContainer.appendChild(likeBtn);
         container.appendChild(movieContainer);
