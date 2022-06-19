@@ -128,8 +128,8 @@ body {
 .liked-movie-container .liked-movieList {
   display: -ms-grid;
   display: grid;
-  -ms-grid-columns: (1fr)[4];
-      grid-template-columns: repeat(4, 1fr);
+  -ms-grid-columns: (1fr)[2];
+      grid-template-columns: repeat(2, 1fr);
   gap: 10px;
 }
 
@@ -694,7 +694,17 @@ body {
   fill: var(--primary);
 }
 
-@media only screen and (min-width: 1440px) {
+@media only screen and (min-width: 768px) {
+  .liked-movie-container .liked-movieList {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: (1fr)[4];
+        grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
   body {
     max-width: 100%;
     display: -ms-grid;
@@ -730,8 +740,8 @@ body {
     overflow-x: hidden;
     display: -ms-grid;
     display: grid;
-    -ms-grid-columns: (1fr)[4];
-        grid-template-columns: repeat(4, 1fr);
+    -ms-grid-columns: (1fr)[3];
+        grid-template-columns: repeat(3, 1fr);
     -ms-grid-rows: (minmax(342px, auto))[5];
         grid-template-rows: repeat(5, minmax(342px, auto));
   }
@@ -861,6 +871,27 @@ body {
   #seeMoreBtnContainer {
     -ms-grid-column: 2;
     grid-column: 2;
+  }
+  .liked-movie-container .liked-movieList {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: (1fr)[3];
+        grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .trendingPreview-container .trendingPreview-movieList {
+    -ms-grid-columns: (1fr)[4];
+        grid-template-columns: repeat(4, 1fr);
+  }
+  .liked-movie-container .liked-movieList {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: (1fr)[4];
+        grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
   }
 }
 

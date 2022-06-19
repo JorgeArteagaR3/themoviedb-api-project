@@ -141,6 +141,7 @@ const categoriesPage = () => {
     arrowContainer.classList.remove("inactive");
     headersSection.classList.remove("inactive");
     headersSection.style.paddingLeft = "1.5em";
+    headersSection.style.height = "50px";
     likedMovieContainer.classList.add("inactive");
 
     const [unncesesary, idname] = location.hash.split("=");
