@@ -3,8 +3,8 @@ let seeMoreCount = 1;
 let infiniteScroll;
 let isInfiniteScrollLoading = false;
 let lastUrl = [];
-window.addEventListener("hashchange", navigator, false);
-window.addEventListener("DOMContentLoaded", navigator, false);
+window.addEventListener("hashchange", router, false);
+window.addEventListener("DOMContentLoaded", router, false);
 searchInput.addEventListener("keypress", (e) => {
     console.log(e);
     let searchData = searchInput.value;
@@ -35,7 +35,8 @@ secondArrow.addEventListener("click", () => {
 arrow.addEventListener("click", () => {
     back();
 });
-function navigator() {
+
+function router() {
     if (infiniteScroll) {
         window.removeEventListener("scroll", infiniteScroll);
         infiniteScroll = undefined;
